@@ -18,6 +18,7 @@ class AuthController extends Controller
         $user->email = $req->email;
         $user->role = "user";
         $user->password = Hash::make($req->password);
+        $user->save();
 
         Auth::login($user);
 
@@ -31,8 +32,6 @@ class AuthController extends Controller
         if (Auth::attempt([$login_type => $request->login, 'password' => $request->password])) {
             $user = Auth::user();
             if (auth()->user()->role === 'admin') {
-                // $links = Link::with('user')->get();
-                // return view('admin');
                 return redirect('/admin');
             } else {
                 return redirect('/')->with('success', 'Login successful!');
