@@ -19,7 +19,7 @@ class CreateLinksTable extends Migration
             $table->string('short_url');
             $table->integer('user_id');
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->softDeletes('deleted_at');
         });
     }
 
